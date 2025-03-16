@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Orbit Details</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Courier New', monospace;
+            background-color: black;
+            color: green;
+            display: flex;
+            position: relative;
+        }
+
+        #matrix {
+            flex: 1;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            pointer-events: none;
+            text-shadow: 0 0 5px rgba(0, 255, 0, 0.8);
+        }
+
+        #communication {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        #communication span {
+            margin-bottom: 10px;
+            text-shadow: 0 0 5px rgba(0, 255, 0, 0.8);
+        }
+
+        #communication-status {
+            margin-top: auto;
+            font-size: 18px;
+            text-align: center;
+            text-shadow: 0 0 5px rgba(0, 255, 0, 0.8);
+        }
+
+        #back-button {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background-color: black;
+            color: green;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            outline: none;
+            text-shadow: 0 0 5px rgba(0, 255, 0, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <div id="matrix"></div>
+    <div id="communication">
+        <div id="communication-status">Communication Status: Online</div>
+    </div>
+
+    <button id="back-button" onclick="window.location.href='home.html'">Back to Home</button>
+
+    <script>
+        function generateRandomSatelliteInfo() {
+            const satellites = ['Satellite A', 'Satellite B', 'Satellite C'];
+            const orbits = ['Low Earth Orbit', 'Medium Earth Orbit', 'Geostationary Orbit'];
+
+            const randomSatellite = satellites[Math.floor(Math.random() * satellites.length)];
+            const randomOrbit = orbits[Math.floor(Math.random() * orbits.length)];
+
+            return `${randomSatellite} - ${randomOrbit}`;
+        }
+
+        function generateRandomCommunicationInfo() {
+            const communicationNames = ['ASTRO communication', 'SPACE LINK', 'STAR CONNECT'];
+            const coordinates = ['12.3456 N, 78.9101 E', '23.4567 S, 45.6789 W', '34.5678 N, 12.3456 E'];
+
+            const randomName = communicationNames[Math.floor(Math.random() * communicationNames.length)];
+            const randomCoordinate = coordinates[Math.floor(Math.random() * coordinates.length)];
+
+            return `${randomName} - ${randomCoordinate}`;
+        }
+
+        function updateMatrix() {
+            const matrixElement = document.getElementById('matrix');
+            matrixElement.innerHTML = '';
+
+            for (let i = 0; i < 50; i++) {
+                const satelliteInfo = generateRandomSatelliteInfo();
+                const span = document.createElement('span');
+                span.textContent = satelliteInfo;
+                matrixElement.appendChild(span);
+
+                if (i < 49) {
+                    const br = document.createElement('br');
+                    matrixElement.appendChild(br);
+                }
+            }
+        }
+
+        function updateCommunication() {
+            const communicationElement = document.getElementById('communication');
+            communicationElement.innerHTML = '';
+
+            for (let i = 0; i < 5; i++) {
+                const communicationInfo = generateRandomCommunicationInfo();
+                const span = document.createElement('span');
+                span.textContent = communicationInfo;
+                communicationElement.appendChild(span);
+            }
+
+            // Update communication status
+            const communicationStatusElement = document.getElementById('communication-status');
+            const status = Math.random() > 0.5 ? 'Online' : 'Offline';
+            communicationStatusElement.textContent = `Communication Status: ${status}`;
+        }
+
+        function startMatrixAnimation() {
+            setInterval(updateMatrix, 2000);
+        }
+
+        function startCommunicationAnimation() {
+            setInterval(updateCommunication, 2000);
+        }
+
+        startMatrixAnimation();
+        startCommunicationAnimation();
+    </script>
+</body>
+</html>

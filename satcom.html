@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Satellite Position</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Courier New', monospace;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden; /* Hide overflow to prevent scrollbars */
+      color: #33ff33;
+      background-color: #000;
+    }
+
+    #matrix-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none; /* Allow interactions with elements behind */
+    }
+
+    .matrix-line {
+      position: absolute;
+      height: 2px;
+      width: 20px;
+      background-color: #33ff33;
+      opacity: 0;
+      animation: matrixFall 2s linear infinite;
+    }
+
+    #coordinates {
+      text-align: center;
+      font-size: 24px;
+      color: #33ff33;
+      background-color: #000;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+
+    #back-button {
+      cursor: pointer;
+      font-size: 18px;
+      color: #33ff33;
+      background-color: #000;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+      outline: none;
+    }
+
+    @keyframes matrixFall {
+      0% {
+        transform: translateY(-100vh);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(100vh);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div id="matrix-container"></div>
+
+<div id="coordinates">
+  <h1>Satellite Position</h1>
+  <p id="latitude">Latitude: 0</p>
+  <p id="longitude">Longitude: 0</p>
+  <p id="altitude">Altitude: 0 meters</p>
+  <button id="back-button" onclick="goBack()">Back to Home</button>
+</div>
+
+<script>
+  // Update coordinates every 2 seconds
+  setInterval(function() {
+    // Replace these values with your actual satellite coordinates
+    var newLatitude = Math.random() * 180 - 90;
+    var newLongitude = Math.random() * 360 - 180;
+    var newAltitude = Math.floor(Math.random() * 10000); // Altitude in meters
+
+    document.getElementById('latitude').innerText = 'Latitude: ' + newLatitude.toFixed(4);
+    document.getElementById('longitude').innerText = 'Longitude: ' + newLongitude.toFixed(4);
+    document.getElementById('altitude').innerText = 'Altitude: ' + newAltitude + ' meters';
+  }, 2000);
+
+  // Matrix background effect
+  var matrixContainer = document.getElementById('matrix-container');
+
+  for (var i = 0; i < 100; i++) {
+    var matrixLine = document.createElement('div');
+    matrixLine.className = 'matrix-line';
+    matrixLine.style.left = Math.random() * 100 + 'vw';
+    matrixLine.style.animationDelay = Math.random() + 's';
+    matrixContainer.appendChild(matrixLine);
+  }
+
+  // Function to navigate back
+  function goBack() {
+    window.location.href = 'home.html';
+  }
+</script>
+
+</body>
+</html>

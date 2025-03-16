@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Space Communications</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      background-color: #0a0a2a; /* Dark blue background */
+      font-family: 'Arial', sans-serif;
+      position: relative;
+    }
+
+    #graph-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1;
+    }
+
+    .dot {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      animation: moveDot linear infinite;
+      background-color: #ff7f50; /* Coral color for dots */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      font-size: 10px;
+    }
+
+    @keyframes moveDot {
+      0% { transform: translate(0, 0); }
+      25% { transform: translate(100%, 0); }
+      50% { transform: translate(100%, 100%); }
+      75% { transform: translate(0, 100%); }
+      100% { transform: translate(0, 0); }
+    }
+
+    /* Additional styles for a space-themed background */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: url('space-background.jpg') center/cover;
+      z-index: -1;
+    }
+
+    /* Styles for the waves at the bottom */
+    .wave-container {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100vw;
+      height: 50px;
+      overflow: hidden;
+    }
+
+    .wave {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to right, #1a1a4a, #0a0a2a);
+      animation: waveAnimation 2s ease-in-out infinite alternate-reverse;
+    }
+
+    @keyframes waveAnimation {
+      0% {
+        transform: translateY(0);
+      }
+      100% {
+        transform: translateY(-50px);
+      }
+    }
+
+    /* Text styling for movements in space */
+    .movement-text {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 20px;
+      color: #fff;
+    }
+
+    /* Semi-transparent line overlay */
+    body::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background: radial-gradient(ellipse at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 100%);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* Sensor effect */
+    .sensor {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: #4caf50; /* Green color for the sensor */
+      animation: sensorEffect 1.5s ease-in-out infinite alternate;
+      z-index: 3;
+    }
+
+    @keyframes sensorEffect {
+      0% {
+        transform: scale(1);
+      }
+      100% {
+        transform: scale(1.2);
+      }
+    }
+
+    /* Communication signal effect */
+    .signal {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 50px;
+      background: linear-gradient(to top, transparent, #4caf50);
+      animation: signalAnimation 2s ease-in-out infinite alternate-reverse;
+      z-index: 2;
+    }
+
+    @keyframes signalAnimation {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-50px);
+      }
+    }
+
+    /* Back button styling */
+    .back-button {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      cursor: pointer;
+      background-color: #000;
+      color: #fff;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+    }
+  </style>
+</head>
+<body>
+ 
+
+
+  <div id="graph-container"></div>
+
+  <!-- Waves at the bottom -->
+  <div class="wave-container">
+    <div class="wave"></div>
+  </div>
+
+  <!-- Text for movements in space -->
+  <div class="movement-text">Movements in Space ASTRO</div>
+
+  <!-- Sensor effect -->
+  <div class="sensor"></div>
+
+  <!-- Communication signal effect -->
+  <div class="signal"></div>
+
+  <script>
+    function getRandomColor() {
+      const letters = '0123456789ABCDEF';
+      let color = '#';
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+
+    function createDot(index) {
+      const dot = document.createElement('div');
+      dot.className = 'dot';
+      dot.style.backgroundColor = getRandomColor();
+      dot.innerHTML = `AS${index + 1}`;
+      document.getElementById('graph-container').appendChild(dot);
+      return dot;
+    }
+
+    function moveDot(dot) {
+      const randomX = Math.random() * (window.innerWidth - 10);
+      const randomY = Math.random() * (window.innerHeight - 10);
+
+      dot.style.transform = `translate(${randomX}px, ${randomY}px)`;
+    }
+
+    // Create and move dots every 2 seconds
+    setInterval(() => {
+      const dots = document.querySelectorAll('.dot');
+      dots.forEach((dot, index) => {
+        moveDot(dot);
+      });
+    }, 2000);
+
+    // Initial dot creation
+    for (let i = 0; i < 20; i++) {
+      createDot(i);
+    }
+  </script>
+</body>
+</html>

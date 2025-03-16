@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background-image: url('https://i.postimg.cc/9Qp1VcQj/Gemini-Generated-Image-4.jpg');
+      background-size: cover;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .login-container {
+      text-align: center;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    #logo {
+      max-width: 80px;
+      height: auto;
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    #loginBtn {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #loginBtn:hover {
+      background-color: #45a049;
+    }
+
+    label {
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #333;
+    }
+
+    input {
+      padding: 8px;
+      margin: 5px 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <img src="https://i.postimg.cc/RFbZzxwC/Gemini-Generated-Image.jpg" alt="Logo" id="logo">
+    <h2>Login</h2>
+    <form action="home.html"> <!-- Link the form to home.html -->
+      <label for="username">User ID</label>
+      <input type="text" id="username" name="username" required>
+      <br>
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required>
+      <br>
+      <button type="submit" id="loginBtn">Login</button>
+    </form>
+  </div>
+</body>
+</html>
